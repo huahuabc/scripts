@@ -51,7 +51,7 @@ add_swap() {
     rm -f $SWAPFILE
 
     if [[ "$ROOT_FS" == "btrfs" ]]; then
-        echo -e "${Green}btrfs 系统，使用 dd 创建 swap 并关闭 CoW...${Font}"
+        echo -e "${Green}btrfs 系统，使用 dd 创建 swap 并禁用 CoW...${Font}"
         dd if=/dev/zero of=$SWAPFILE bs=1M count=$swapsize status=progress
         chattr +C $SWAPFILE  # 禁用 CoW
         chmod 600 $SWAPFILE
@@ -97,7 +97,7 @@ main() {
     check_ovz
     clear
     echo -e "———————————————————————————————————————"
-    echo -e "${Green}Linux VPS 一键添加/删除 SWAP（通用版）${Font}"
+    echo -e "${Green}Linux VPS 一键添加/删除 SWAP（btrfs 兼容版）${Font}"
     echo -e "${Green}1.${Font} 添加 swap"
     echo -e "${Green}2.${Font} 删除 swap"
     echo -e "———————————————————————————————————————"
